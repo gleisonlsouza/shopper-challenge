@@ -1,0 +1,23 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "3333:3333" # Mapeia a porta do contêiner para a porta local
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "80:3000" # Mapeia a porta 80 do contêiner para a porta 3000 local (outra porta, se a 80 já estiver em uso)
+
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: shopperAdmin2023
+      MYSQL_DATABASE: shopper
+      MYSQL_USER: shopperUser2023
+      MYSQL_PASSWORD: shopperUser2023
+    ports:
+      - "3307:3306" # Mapeia a porta do contêiner para a porta local
