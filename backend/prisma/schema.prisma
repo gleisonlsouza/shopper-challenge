@@ -1,11 +1,30 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+// Modelo para a tabela 'products'
+model Product {
+  code       BigInt     @id @map("code")
+  name       String     @db.VarChar(100)
+  cost_price Decimal    @db.Decimal(9, 2)
+  sales_price Decimal   @db.Decimal(9, 2)
+
+  // Relação com a tabela 'packs'
+  packs      Pack[]     @relation("packs")
+}
+
+// Modelo para a tabela 'packs'
+model Pack {
+  id         BigInt     @id @default(autoincrement()) @map("id")
+  pack_id    BigInt     @map("pack_id")
+
+  // Relação com a tabela 'products'
+  product    Product    @relation("packs", fields: [pack_id], references: [code])
+  qty        BigInt     @map("qty")
+}
+
