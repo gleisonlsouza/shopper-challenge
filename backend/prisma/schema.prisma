@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
 }
 
 datasource db {
@@ -7,24 +8,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Modelo para a tabela 'products'
-model Product {
-  code       BigInt     @id @map("code")
-  name       String     @db.VarChar(100)
-  cost_price Decimal    @db.Decimal(9, 2)
-  sales_price Decimal   @db.Decimal(9, 2)
+model packs {
+  id                                  BigInt   @id @default(autoincrement())
+  pack_id                             BigInt
+  product_id                          BigInt
+  qty                                 BigInt
+  products_packs_pack_idToproducts    products @relation("packs_pack_idToproducts", fields: [pack_id], references: [code], onDelete: NoAction, onUpdate: NoAction, map: "packs_ibfk_1")
+  products_packs_product_idToproducts products @relation("packs_product_idToproducts", fields: [product_id], references: [code], onDelete: NoAction, onUpdate: NoAction, map: "packs_ibfk_2")
 
-  // Relação com a tabela 'packs'
-  packs      Pack[]     @relation("packs")
+  @@index([pack_id], map: "pack_id")
+  @@index([product_id], map: "product_id")
 }
 
-// Modelo para a tabela 'packs'
-model Pack {
-  id         BigInt     @id @default(autoincrement()) @map("id")
-  pack_id    BigInt     @map("pack_id")
-
-  // Relação com a tabela 'products'
-  product    Product    @relation("packs", fields: [pack_id], references: [code])
-  qty        BigInt     @map("qty")
+model products {
+  code                             BigInt  @id
+  name                             String  @db.VarChar(100)
+  cost_price                       Decimal @db.Decimal(9, 2)
+  sales_price                      Decimal @db.Decimal(9, 2)
+  packs_packs_pack_idToproducts    packs[] @relation("packs_pack_idToproducts")
+  packs_packs_product_idToproducts packs[] @relation("packs_product_idToproducts")
 }
-

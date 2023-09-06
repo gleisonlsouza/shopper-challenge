@@ -1,9 +1,8 @@
 import { Router } from "express";
+import { productsRouter } from "./productsRoutes";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.send("Hello World");
-});
+router.use("/api/products", productsRouter);
 
 export { router };
