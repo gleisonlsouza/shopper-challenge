@@ -41,8 +41,29 @@ git clone git@github.com:gleisoncoruja/shopper-chalange.git
 ```sh
 cd shopper-chalange
 ```
+3. Navegue para o diretório do backend:
 
-3. Execute o seguinte comando para iniciar o projeto com Docker:
+```sh
+cd backend
+```
+4. Renomeie o arquivo .env-copy para .env:
+
+Windows
+```sh
+ren .env-copy .env
+```
+
+Linux
+```sh
+mv .env-copy .env
+```
+5. Navegue de volta para o diretório principal do projeto:
+
+```sh
+cd ..
+```
+
+6. Execute o seguinte comando para iniciar o projeto com Docker:
 
 ```sh
 docker-compose up --build
