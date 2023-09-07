@@ -77,7 +77,7 @@ Aguarde até que todos os containers estejam prontos e o sistema esteja funciona
 
 ### Frontend
 
-1. Acesse a interface do usuário em seu navegador em [http://localhost](http://localhost).
+1. Acesse a interface do usuário em seu navegador em [http://localhost:3000/](http://localhost:3000/).
 
 2. Na página principal, você verá listado todos os produtos.
 
