@@ -1,5 +1,7 @@
 FROM node:18.12.0
 
+RUN apt-get update && apt-get install -y netcat
+
 WORKDIR /app/backend
 
 COPY package*.json ./
@@ -8,6 +10,14 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3000
+COPY wait-for-it.sh wait-for-it.sh 
+COPY entrypoint-app.sh entrypoint-app.sh
+RUN chmod +x wait-for-it.sh 
+RUN chmod +x entrypoint-app.sh
 
-CMD ["npm", "start"]
+ENTRYPOINT ["./entrypoint-app.sh"]
+
+
+
+
+
