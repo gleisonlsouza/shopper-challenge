@@ -1,5 +1,14 @@
 version: '3'
 services:
+  mysql:
+      image: mysql:8
+      environment:
+        MYSQL_ROOT_PASSWORD: shopperAdmin2023
+        MYSQL_DATABASE: shopper
+        MYSQL_USER: shopperUser2023
+        MYSQL_PASSWORD: shopperUser2023
+      ports:
+        - "3307:3306"
   backend:
     build:
       context: ./backend
@@ -15,13 +24,3 @@ services:
       context: ./frontend
     ports:
       - "80:3000"
-
-  mysql:
-    image: mysql:8
-    environment:
-      MYSQL_ROOT_PASSWORD: shopperAdmin2023
-      MYSQL_DATABASE: shopper
-      MYSQL_USER: shopperUser2023
-      MYSQL_PASSWORD: shopperUser2023
-    ports:
-      - "3307:3306"
