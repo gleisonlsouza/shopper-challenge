@@ -1,4 +1,4 @@
-# Shopper-Chalange
+# Shopper-Challenge
 
 Este é um projeto desenvolvido como parte de um desafio técnico para concorrer a uma vaga na empresa Shopper.com.br.
 
